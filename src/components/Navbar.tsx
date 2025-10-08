@@ -1,13 +1,15 @@
 'use client'
 
 import { Home, Mail, FileText, Briefcase, BarChart3, User } from 'lucide-react'
+import Notifications from './Notifications'
 
 interface NavbarProps {
   activeTab: string
   onTabChange: (tab: string) => void
+  candidatures?: any[]
 }
 
-export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
+export default function Navbar({ activeTab, onTabChange, candidatures = [] }: NavbarProps) {
   const navItems = [
     {
       id: 'accueil',
@@ -45,8 +47,8 @@ export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
+          {/* Logo et Notifications */}
+          <div className="flex-shrink-0 flex items-center space-x-4">
             <div className="flex items-center space-x-2 sm:space-x-3">
               <div className="bg-blue-600 p-1.5 sm:p-2 rounded-lg">
                 <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -59,6 +61,9 @@ export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
                 <h1 className="text-lg font-bold text-gray-900">Standey</h1>
               </div>
             </div>
+            
+            {/* Notifications */}
+            <Notifications candidatures={candidatures} />
           </div>
 
           {/* Navigation desktop */}

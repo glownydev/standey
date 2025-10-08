@@ -144,7 +144,8 @@ export default function EnvoiMailModal({ candidature, onClose, onSent }: EnvoiMa
           candidature,
           template,
           profil,
-          genererContenuAvecSignature()
+          genererContenuAvecSignature(),
+          includeCV
         )
 
         const result = await EmailService.send(emailData)

@@ -9,6 +9,8 @@ interface EmailData {
   subject: string
   message: string
   reply_to: string
+  cv_url?: string  // URL du CV à joindre
+  include_cv?: boolean  // Si on doit inclure le CV
 }
 
 // Service d'envoi d'email intégré
@@ -139,7 +141,8 @@ export function createEmailFromCandidature(
   candidature: any,
   template: any,
   profil: any,
-  contenuPersonnalise?: string
+  contenuPersonnalise?: string,
+  includeCV?: boolean
 ): EmailData {
   
   // Utiliser l'email du profil ou l'email par défaut
@@ -184,6 +187,8 @@ ${profil?.signature || `Cordialement,\n${fromName}\n${fromEmail}`}
     from_email: fromEmail,
     subject: objetFinal,
     message: contenuFinal,
-    reply_to: fromEmail
+    reply_to: fromEmail,
+    cv_url: profil?.cvUrl || '',
+    include_cv: includeCV !== false  // Par défaut true sauf si explicitement false
   }
 }

@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
     console.log('Objet:', emailData.subject)
 
     try {
-      // Envoi réel avec Resend
-      const result = await resend.emails.send({
+      // Configuration de base pour l'email
+      const emailConfig: any = {
         from: 'tamim@tamimkh.com', // Votre adresse depuis votre domaine
         to: [emailData.to_email],
         subject: emailData.subject,
@@ -47,7 +47,32 @@ export async function POST(request: NextRequest) {
         `,
         text: emailData.message,
         replyTo: emailData.reply_to || emailData.from_email,
-      })
+      }
+
+      // Ajouter la pièce jointe CV si nécessaire
+      if (emailData.include_cv && emailData.cv_url) {
+        try {
+          // Télécharger le CV depuis l'URL pour l'envoyer en pièce jointe
+          const cvResponse = await fetch(emailData.cv_url)
+          if (cvResponse.ok) {
+            const cvBuffer = await cvResponse.arrayBuffer()
+            const cvBase64 = Buffer.from(cvBuffer).toString('base64')
+            
+            emailConfig.attachments = [{
+              filename: 'CV.pdf',
+              content: cvBase64,
+            }]
+            console.log('📎 CV ajouté en pièce jointe')
+          } else {
+            console.log('⚠️ Impossible de récupérer le CV, envoi sans pièce jointe')
+          }
+        } catch (cvError) {
+          console.log('⚠️ Erreur lors du traitement du CV:', cvError)
+        }
+      }
+
+      // Envoi réel avec Resend
+      const result = await resend.emails.send(emailConfig)
 
       console.log('✅ Email envoyé avec succès via Resend:', result)
 
