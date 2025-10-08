@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Forcer le mode clair */
+body {
+  color: #374151 !important;
+  background: #f9fafb !important;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Forcer les inputs en mode clair */
+input, textarea, select {
+  background-color: #ffffff !important;
+  color: #374151 !important;
+  border-color: #d1d5db !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  background-color: #ffffff !important;
+  color: #374151 !important;
+}
+
+/* Forcer les modales et cartes */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.text-gray-900 {
+  color: #111827 !important;
+}
+
+.text-gray-700 {
+  color: #374151 !important;
+}
+
+.text-gray-600 {
+  color: #4b5563 !important;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

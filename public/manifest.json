@@ -1,0 +1,16 @@
+{
+  "name": "Standey - Tracker de Candidatures",
+  "short_name": "Standey",
+  "description": "Application de suivi des candidatures de stage et emploi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
